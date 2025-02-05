@@ -19,6 +19,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
 # Environnements virtuels
 venv/
@@ -29,15 +30,18 @@ ENV/
 env.bak/
 venv.bak/
 
-# Tests
+# Tests et couverture
 .pytest_cache/
 .coverage
 htmlcov/
 .tox/
+.nox/
 nosetests.xml
 coverage.xml
 *.cover
+*.py,cover
 .hypothesis/
+cover/
 
 # IDE
 .idea/
@@ -45,29 +49,48 @@ coverage.xml
 *.swp
 *.swo
 .DS_Store
-.project
-.classpath
-.settings/
+*.sublime-project
+*.sublime-workspace
 
-# Logs
-*.log
+# Logs et données
 logs/
+*.log
+*.log.*
 log/
 
-# Configuration locale
+# Fichiers spécifiques au projet
 config.local.ini
 settings.local.py
+test_data/
+*.db
+*.sqlite3
 
 # Cache
 .mypy_cache/
 .dmypy.json
 dmypy.json
+.pyre/
+.pytype/
+__pypackages__/
 
 # Documentation générée
 docs/_build/
 site/
+.pdoc/
 
-# Données de test
-test_data/
-*.db
-*.sqlite3
+# Fichiers temporaires
+*.tmp
+*.bak
+*.swp
+*~
+.~lock.*
+
+# Fichiers de configuration locaux
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Dépendances
+node_modules/
+jspm_packages/
