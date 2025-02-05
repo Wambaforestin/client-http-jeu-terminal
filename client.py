@@ -178,7 +178,7 @@ def main():
         print(f"Erreur: {message}")
         sys.exit(1)
     
-    print("Inscription réussie! Commandes: zqsd pour se déplacer, q pour quitter")
+    print("Inscription réussie! Commandes: zqsd pour se déplacer, q pour quiter")
     
     # Boucle principale
     while True:
