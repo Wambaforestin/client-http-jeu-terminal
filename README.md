@@ -82,3 +82,4 @@ def afficher_carte(self, vision: Dict):
   - `V` : Villageois
   - `?` : Inconnu
   - `X` : Obstacle
+

@@ -1,11 +1,13 @@
 import requests
 import time
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, Optional, Tuple
 from dataclasses import dataclass
 from enum import Enum
 import logging
 import sys
 from datetime import datetime
+import colorama
+from colorama import Fore, Style
 
 class Role(Enum):
     LOUP = "loup"
@@ -36,13 +38,7 @@ class GameClient:
         self.logger = logging.getLogger(__name__)
 
     def inscription(self, login: str, role: Role) -> Tuple[bool, str]:
-        """
-        Inscription d'un joueur
-        
-        Args:
-            login (str): 3-20 chars alphanum
-            role (Role): LOUP/VILLAGEOIS
-        """
+        """Inscription d'un joueur"""
         try:
             if not 3 <= len(login) <= 20 or not login.isalnum():
                 raise ValueError("Login invalide (3-20 caractères alphanumériques)")
@@ -68,12 +64,7 @@ class GameClient:
             return False, str(e)
 
     def deplacer(self, nouvelle_position: Position) -> Tuple[bool, str]:
-        """
-        Déplacement du joueur
-        
-        Args:
-            nouvelle_position (Position): Nouvelle position x,y
-        """
+        """Déplacement du joueur"""
         if not self.player_id:
             return False, "Non inscrit"
 
@@ -100,9 +91,7 @@ class GameClient:
             return False, str(e)
 
     def get_vision(self) -> Optional[Dict]:
-        """
-        Récupère la vision du joueur
-        """
+        """Récupère la vision du joueur"""
         if not self.player_id:
             return None
 
@@ -123,9 +112,7 @@ class GameClient:
             return None
 
     def afficher_carte(self, vision: Dict):
-        """
-        Affiche la carte en mode terminal
-        """
+        """Affiche la carte en mode terminal"""
         if not vision:
             print("Aucune vision disponible")
             return
@@ -162,6 +149,9 @@ class GameClient:
             return 0
 
 def main():
+    # Initialisation de colorama
+    colorama.init(autoreset=True)
+    
     # Configuration du client
     client = GameClient()
     
@@ -178,7 +168,7 @@ def main():
         print(f"Erreur: {message}")
         sys.exit(1)
     
-    print("Inscription réussie! Commandes: zqsd pour se déplacer, q pour quiter")
+    print(f"{Fore.GREEN}Inscription réussie! Commandes: zqsd pour se déplacer, q pour quitter")
     
     # Boucle principale
     while True:
@@ -201,7 +191,7 @@ def main():
             )
             success, msg = client.deplacer(nouvelle_pos)
             if not success:
-                print(f"Erreur de déplacement: {msg}")
+                print(f"{Fore.RED}Erreur de déplacement: {msg}")
 
 if __name__ == "__main__":
     main()
